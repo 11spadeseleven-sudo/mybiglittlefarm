@@ -57,11 +57,15 @@ const initialForm = {
   quantity: "",
   message: "",
   consent: false,
+  website: "",
 };
 
 export default function ContactPage() {
   const [form, setForm] = useState(initialForm);
-  const [submitted, setSubmitted] = useState(false);
+  const [submitState, setSubmitState] = useState({
+    status: "idle",
+    message: "",
+  });
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
@@ -81,30 +85,50 @@ export default function ContactPage() {
       ...current,
       [name]: type === "checkbox" ? checked : value,
     }));
+
+    if (submitState.status !== "idle") {
+      setSubmitState({ status: "idle", message: "" });
+    }
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
-    if (!form.consent) {
+    if (!form.consent || submitState.status === "submitting") {
       return;
     }
 
-    const message = [
-      "Hello My Big Little Farm. I would like to send an enquiry.",
-      "",
-      `Name: ${form.fullName}`,
-      `Phone: ${form.phone}`,
-      form.email ? `Email: ${form.email}` : null,
-      `Enquiry type: ${form.enquiryType}`,
-      form.quantity ? `Quantity required: ${form.quantity}` : null,
-      `Message: ${form.message}`,
-    ]
-      .filter(Boolean)
-      .join("\n");
+    setSubmitState({ status: "submitting", message: "Sending your enquiry…" });
 
-    window.open(`${whatsappBase}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
-    setSubmitted(true);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(result.error || "Your enquiry could not be sent.");
+      }
+
+      setSubmitState({
+        status: "success",
+        message:
+          "Thank you. Your enquiry has been emailed to My Big Little Farm and we’ll get back to you using the details you provided.",
+      });
+      setForm(initialForm);
+    } catch (error) {
+      setSubmitState({
+        status: "error",
+        message:
+          error.message ||
+          "Something went wrong while sending your enquiry. Please try again or contact us on WhatsApp.",
+      });
+    }
   }
 
   return (
@@ -201,9 +225,8 @@ export default function ContactPage() {
               <span className="section-label">Send an enquiry</span>
               <h2>Tell us what you need.</h2>
               <p>
-                Complete the form with your details and the type of quail egg
-                enquiry you would like to make. Submitting the form opens a ready-to-send
-                WhatsApp message.
+                Complete the form and your enquiry will be sent directly to our
+                sales inbox at <strong>sales@mybiglittlefarm.co.za</strong>.
               </p>
 
               <div className="contact-person-card">
@@ -228,14 +251,29 @@ export default function ContactPage() {
             </div>
 
             <div className="contact-form-card">
-              {submitted && (
-                <div className="contact-success" role="status">
-                  Your WhatsApp enquiry has been prepared. Send it in the WhatsApp
-                  window to complete your enquiry.
+              {submitState.status !== "idle" && (
+                <div
+                  className={`contact-form-status contact-form-status-${submitState.status}`}
+                  role={submitState.status === "error" ? "alert" : "status"}
+                  aria-live="polite"
+                >
+                  {submitState.message}
                 </div>
               )}
 
               <form onSubmit={handleSubmit}>
+                <label className="contact-honeypot" aria-hidden="true">
+                  Website
+                  <input
+                    type="text"
+                    name="website"
+                    value={form.website}
+                    onChange={updateField}
+                    tabIndex="-1"
+                    autoComplete="off"
+                  />
+                </label>
+
                 <div className="contact-fields-grid">
                   <label className="contact-field">
                     <span>Full Name *</span>
@@ -284,6 +322,7 @@ export default function ContactPage() {
                       required
                     >
                       <option>Fresh Quail Eggs</option>
+                      <option>Fertile Eggs</option>
                       <option>Bulk Order</option>
                       <option>Business Supply</option>
                       <option>General Enquiry</option>
@@ -328,9 +367,13 @@ export default function ContactPage() {
                   </span>
                 </label>
 
-                <button className="button button-primary contact-submit" type="submit">
+                <button
+                  className="button button-primary contact-submit"
+                  type="submit"
+                  disabled={submitState.status === "submitting"}
+                >
                   <MessageIcon size={19} />
-                  Send Enquiry
+                  {submitState.status === "submitting" ? "Sending…" : "Send Enquiry"}
                 </button>
               </form>
             </div>

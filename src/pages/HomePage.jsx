@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import WhatsAppButton from "../components/WhatsAppButton";
@@ -13,8 +14,49 @@ import {
   WhatsAppIcon,
 } from "../components/Icons";
 
-const whatsappUrl =
-  "https://wa.me/27782785314?text=Hello%20My%20Big%20Little%20Farm.%20I%20would%20like%20to%20enquire%20about%20your%20fresh%20quail%20eggs.";
+const quailWhatsappBase = "https://wa.me/27782785314";
+const fertileWhatsappBase = "https://wa.me/27716562369";
+
+const quailWhatsappUrl = `${quailWhatsappBase}?text=${encodeURIComponent(
+  "Hello My Big Little Farm. I would like to enquire about your fresh quail eggs."
+)}`;
+
+const fertileWhatsappUrl = `${fertileWhatsappBase}?text=${encodeURIComponent(
+  "Hello My Big Little Farm. I would like to enquire about the fertile eggs at R50 per egg. Please let me know about Buff Orpington and Light Columbian Brahma availability."
+)}`;
+
+const heroSlides = [
+  {
+    id: "fertile",
+    eyebrow: "Fertile eggs now available",
+    title: "Grow Your Flock.",
+    highlight: "Fertile Eggs from R50.",
+    lead: "Buff Orpington and Light Columbian Brahma fertile eggs are now available from My Big Little Farm.",
+    primaryLabel: "Order Fertile Eggs",
+    primaryHref: fertileWhatsappUrl,
+    secondaryLabel: "Contact the Farm",
+    secondaryHref: "/contact",
+    trustItems: ["R50 an egg", "Buff Orpington", "Light Columbian Brahma"],
+    image: "/assets/fertile-eggs-promo.png",
+    imageAlt: "My Big Little Farm fertile egg promotion for Buff Orpington and Light Columbian Brahma eggs",
+    imageClass: "hero-promo-image",
+  },
+  {
+    id: "quail",
+    eyebrow: "Fresh from our farm",
+    title: "Small Eggs.",
+    highlight: "Big Farm Freshness.",
+    lead: "Fresh quail eggs supplied with care from My Big Little Farm in Laezonia, Centurion.",
+    primaryLabel: "Order / Enquire",
+    primaryHref: quailWhatsappUrl,
+    secondaryLabel: "View Our Services",
+    secondaryHref: "#product",
+    trustItems: ["Freshly supplied", "Carefully packaged", "Friendly local service"],
+    image: "/assets/quail-eggs-closeup.jpg",
+    imageAlt: "A close-up collection of naturally speckled quail eggs",
+    imageClass: "",
+  },
+];
 
 const benefits = [
   {
@@ -40,47 +82,95 @@ const benefits = [
 ];
 
 export default function HomePage() {
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveSlide((current) => (current + 1) % heroSlides.length);
+    }, 8500);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const slide = heroSlides[activeSlide];
+
+  function goToSlide(index) {
+    setActiveSlide(index);
+  }
+
+  function previousSlide() {
+    setActiveSlide((current) =>
+      current === 0 ? heroSlides.length - 1 : current - 1
+    );
+  }
+
+  function nextSlide() {
+    setActiveSlide((current) => (current + 1) % heroSlides.length);
+  }
+
   return (
     <div className="site-shell">
       <SEO
         title="Fresh Quail Eggs in Centurion"
-        description="Fresh quail eggs supplied with care by My Big Little Farm in Laezonia, Centurion. Enquire about household, bulk and business supply."
+        description="Fresh quail eggs and fertile chicken eggs supplied by My Big Little Farm in Laezonia, Centurion. Enquire about household, bulk and business supply."
         path="/"
       />
       <Header />
 
       <main>
-        <section className="hero section-cream">
-          <div className="container hero-grid">
+        <section className="hero hero-slider section-cream">
+          <div className="hero-video-layer" aria-hidden="true">
+            <video
+              className="hero-background-video"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              poster="/assets/quail-eggs-wide.jpg"
+            >
+              <source
+                src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Chickens_scratching.webm"
+                type="video/webm"
+              />
+            </video>
+            <div className="hero-video-wash" />
+          </div>
+
+          <div className="container hero-grid hero-slide" key={slide.id}>
             <div className="hero-copy">
-              <span className="eyebrow">Fresh from our farm</span>
+              <span className="eyebrow">{slide.eyebrow}</span>
               <h1>
-                Small Eggs.
-                <span>Big Farm Freshness.</span>
+                {slide.title}
+                <span>{slide.highlight}</span>
               </h1>
-              <p className="hero-lead">
-                Fresh quail eggs supplied with care from My Big Little Farm in
-                Laezonia, Centurion.
-              </p>
+              <p className="hero-lead">{slide.lead}</p>
 
               <div className="hero-actions">
                 <a
                   className="button button-primary button-large"
-                  href={whatsappUrl}
+                  href={slide.primaryHref}
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Order / Enquire
+                  {slide.primaryLabel}
                   <ArrowRightIcon />
                 </a>
-                <a className="button button-outline button-large" href="#product">
-                  View Our Services
+                <a
+                  className="button button-outline button-large"
+                  href={slide.secondaryHref}
+                >
+                  {slide.secondaryLabel}
                 </a>
               </div>
 
               <p className="trust-line">
-                Freshly supplied <span>•</span> Carefully packaged <span>•</span>{" "}
-                Friendly local service
+                {slide.trustItems.map((item, index) => (
+                  <span className="trust-item" key={item}>
+                    {index > 0 && <b aria-hidden="true">•</b>}
+                    {item}
+                  </span>
+                ))}
               </p>
             </div>
 
@@ -88,12 +178,53 @@ export default function HomePage() {
               <div className="hero-glow" aria-hidden="true" />
               <div className="image-card hero-image-card">
                 <img
-                  src="/assets/quail-eggs-closeup.jpg"
-                  alt="A close-up collection of naturally speckled quail eggs"
+                  className={slide.imageClass}
+                  src={slide.image}
+                  alt={slide.imageAlt}
                 />
               </div>
             </div>
           </div>
+
+          <div className="container hero-slider-controls" aria-label="Hero promotions">
+            <button
+              className="hero-slider-arrow"
+              type="button"
+              onClick={previousSlide}
+              aria-label="Previous promotion"
+            >
+              ‹
+            </button>
+            <div className="hero-slider-dots">
+              {heroSlides.map((item, index) => (
+                <button
+                  key={item.id}
+                  className={`hero-slider-dot ${index === activeSlide ? "active" : ""}`}
+                  type="button"
+                  onClick={() => goToSlide(index)}
+                  aria-label={`Show promotion ${index + 1}`}
+                  aria-current={index === activeSlide ? "true" : undefined}
+                />
+              ))}
+            </div>
+            <button
+              className="hero-slider-arrow"
+              type="button"
+              onClick={nextSlide}
+              aria-label="Next promotion"
+            >
+              ›
+            </button>
+          </div>
+
+          <a
+            className="hero-video-credit"
+            href="https://commons.wikimedia.org/wiki/File:Chickens_scratching.webm"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Background video: Remarksman / CC BY 2.0
+          </a>
         </section>
 
         <section id="product" className="product-section section-white">
@@ -136,7 +267,7 @@ export default function HomePage() {
 
               <a
                 className="button button-dark product-button"
-                href={whatsappUrl}
+                href={quailWhatsappUrl}
                 target="_blank"
                 rel="noreferrer"
               >
@@ -201,7 +332,7 @@ export default function HomePage() {
                 <div className="cta-actions">
                   <a
                     className="button button-primary button-large"
-                    href={whatsappUrl}
+                    href={quailWhatsappUrl}
                     target="_blank"
                     rel="noreferrer"
                   >

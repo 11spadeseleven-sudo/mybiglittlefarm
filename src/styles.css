@@ -26,7 +26,7 @@ html {
 body {
   margin: 0;
   min-width: 320px;
-  background: var(--cream);
+  background: var(--white);
   color: var(--ink);
   font-family: "Nunito Sans", sans-serif;
   font-size: 16px;
@@ -91,7 +91,7 @@ h2 {
 }
 
 .section-cream {
-  background: var(--cream);
+  background: var(--white);
 }
 
 .section-white {
@@ -192,7 +192,7 @@ h2 {
   top: 0;
   height: var(--header-height);
   border-bottom: 1px solid rgba(18, 54, 0, 0.06);
-  background: rgba(255, 249, 234, 0.96);
+  background: white;
   backdrop-filter: blur(14px);
 }
 
@@ -546,7 +546,7 @@ h2 {
 .story-copy {
   display: flex;
   align-items: center;
-  background: var(--cream);
+  background: var(--white);
 }
 
 .story-copy-inner {
@@ -1282,7 +1282,7 @@ h2 {
   gap: 28px;
   border: 1px solid var(--line);
   border-radius: 26px;
-  background: var(--cream);
+  background: var(--white);
   box-shadow: 0 18px 42px rgba(34, 47, 28, 0.1);
   text-align: left;
 }
@@ -1353,7 +1353,7 @@ h2 {
 .about-brand-copy {
   display: flex;
   align-items: center;
-  background: var(--cream);
+  background: var(--white);
 }
 
 .about-brand-copy-inner {
@@ -1712,7 +1712,7 @@ h2 {
   padding: 0;
   border: 1px solid rgba(18, 54, 0, 0.1);
   border-radius: 29px;
-  background: var(--cream);
+  background: var(--white);
   box-shadow: 0 22px 52px rgba(34, 47, 28, 0.08);
   grid-template-columns: 1fr 1fr;
 }
@@ -2769,4 +2769,233 @@ h2 {
     flex-direction: column;
     text-align: center;
   }
+}
+
+/* =========================================
+   Homepage hero video + promotional slider
+   ========================================= */
+.hero-slider {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-video-layer {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-background-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.16;
+  filter: saturate(0.8) contrast(0.92);
+}
+
+.hero-video-wash {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.88) 44%, rgba(255, 255, 255, 0.76) 100%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.48));
+}
+
+.hero-slider .hero-grid {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-slide {
+  animation: heroSlideIn 520ms ease both;
+}
+
+@keyframes heroSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-promo-image {
+  object-position: center;
+}
+
+.hero-slider-controls {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  margin-top: -35px;
+  align-items: center;
+  gap: 9px;
+}
+
+.hero-slider-arrow {
+  display: inline-flex;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(18, 54, 0, 0.18);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.82);
+  color: var(--deep-green);
+  font-size: 1.45rem;
+  line-height: 1;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: 180ms ease;
+}
+
+.hero-slider-arrow:hover {
+  border-color: var(--fresh-green);
+  background: var(--white);
+  color: var(--fresh-green);
+}
+
+.hero-slider-dots {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.hero-slider-dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(18, 54, 0, 0.22);
+  cursor: pointer;
+  transition: 180ms ease;
+}
+
+.hero-slider-dot.active {
+  width: 28px;
+  background: var(--fresh-green);
+}
+
+.hero-video-credit {
+  position: absolute;
+  z-index: 3;
+  right: 18px;
+  bottom: 12px;
+  color: rgba(18, 54, 0, 0.44);
+  font-size: 0.62rem;
+  font-weight: 600;
+}
+
+.hero-video-credit:hover {
+  color: var(--deep-green);
+}
+
+.trust-item {
+  display: inline-flex;
+  align-items: center;
+}
+
+.trust-item b {
+  margin: 0 7px;
+  color: var(--fresh-green);
+  font-weight: 800;
+}
+
+/* ===========================
+   Email contact form feedback
+   =========================== */
+.contact-form-status {
+  margin-bottom: 24px;
+  padding: 16px 18px;
+  border: 1px solid rgba(18, 54, 0, 0.14);
+  border-radius: 14px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.contact-form-status-submitting {
+  background: rgba(253, 246, 130, 0.24);
+  color: var(--deep-green);
+}
+
+.contact-form-status-success {
+  border-color: rgba(86, 185, 71, 0.34);
+  background: rgba(86, 185, 71, 0.1);
+  color: var(--deep-green);
+}
+
+.contact-form-status-error {
+  border-color: rgba(164, 67, 50, 0.24);
+  background: rgba(164, 67, 50, 0.08);
+  color: #7a2d21;
+}
+
+.contact-submit:disabled {
+  opacity: 0.68;
+  cursor: wait;
+  transform: none;
+}
+
+.contact-honeypot {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+}
+
+@media (max-width: 860px) {
+  .hero-slider-controls {
+    margin-top: 24px;
+    justify-content: center;
+  }
+
+  .hero-video-credit {
+    display: none;
+  }
+
+  .hero-background-video {
+    opacity: 0.1;
+  }
+
+  .hero-video-wash {
+    background: rgba(255, 255, 255, 0.9);
+  }
+}
+
+@media (max-width: 620px) {
+  .hero-promo-image {
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .hero-slider-arrow {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-background-video {
+    display: none;
+  }
+
+  .hero-slide {
+    animation: none;
+  }
+}
+
+.hero-slider .trust-line .trust-item {
+  margin-inline: 0;
+  color: #697064;
 }

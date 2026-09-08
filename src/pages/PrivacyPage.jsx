@@ -32,7 +32,7 @@ export default function PrivacyPage() {
               information submitted through this website, WhatsApp, telephone
               calls and other direct enquiries.
             </p>
-            <p className="legal-updated">Last updated: 28 July 2026</p>
+            <p className="legal-updated">Last updated: 7 September 2026</p>
           </div>
         </section>
 
@@ -99,11 +99,15 @@ export default function PrivacyPage() {
               <section>
                 <h2>4. WhatsApp and third-party services</h2>
                 <p>
-                  The current enquiry form can prepare a WhatsApp message. When
-                  you continue to WhatsApp, your information is processed through
-                  WhatsApp under its own privacy terms. Telephone providers,
-                  website hosting providers and other necessary service providers
-                  may also process limited information to deliver their services.
+                  The website enquiry form sends the information you submit to
+                  My Big Little Farm by email so that the team can respond to your
+                  request. An email delivery provider and the website hosting
+                  provider may process limited information only as needed to
+                  transmit and secure the enquiry. If you choose to continue via
+                  WhatsApp, your information is also processed by WhatsApp under
+                  its own privacy terms. Telephone providers and other necessary
+                  service providers may process limited information to deliver
+                  their services.
                 </p>
                 <p>
                   We do not sell personal information to advertisers or data
