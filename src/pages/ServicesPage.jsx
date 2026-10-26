@@ -296,6 +296,9 @@ export default function ServicesPage() {
               <a className="phone-link services-business-phone" href="tel:+27782785314">
                 <PhoneIcon /> Speak to Ndzalama Ngwenya
               </a>
+              <a className="phone-link services-business-email" href="mailto:sales@mybiglittlefarm.co.za">
+                sales@mybiglittlefarm.co.za
+              </a>
             </div>
           </div>
         </section>

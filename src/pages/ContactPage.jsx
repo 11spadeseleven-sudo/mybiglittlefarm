@@ -14,6 +14,7 @@ import {
 
 const phoneNumber = "078 278 5314";
 const phoneHref = "tel:+27782785314";
+const contactEmail = "sales@mybiglittlefarm.co.za";
 const whatsappBase = "https://wa.me/27782785314";
 const mapUrl =
   "https://www.google.com/maps/search/?api=1&query=3%20Bodley%20Road%2C%20Laezonia%2C%20Centurion";
@@ -226,7 +227,7 @@ export default function ContactPage() {
               <h2>Tell us what you need.</h2>
               <p>
                 Complete the form and your enquiry will be sent directly to our
-                sales inbox at <strong>sales@mybiglittlefarm.co.za</strong>.
+                sales inbox at <strong>{contactEmail}</strong>.
               </p>
 
               <div className="contact-person-card">
@@ -237,6 +238,7 @@ export default function ContactPage() {
                   <h3>Ndzalama Ngwenya</h3>
                   <p>Marketing Manager</p>
                   <a href={phoneHref}>{phoneNumber}</a>
+                  <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
                 </div>
               </div>
 

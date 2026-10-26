@@ -1313,7 +1313,7 @@ h2 {
 }
 
 .about-contact-details > a {
-  display: inline-flex;
+  display: flex;
   margin-bottom: 8px;
   color: var(--deep-green);
   font-weight: 800;
@@ -1877,6 +1877,13 @@ h2 {
   margin: 0;
 }
 
+.services-business-email {
+  width: auto;
+  margin: 0;
+  color: var(--deep-green);
+  font-weight: 800;
+}
+
 @media (max-width: 1060px) {
   .services-hero-grid {
     grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
@@ -2230,6 +2237,7 @@ h2 {
 }
 
 .contact-person-card a {
+  display: block;
   color: var(--deep-green);
   font-weight: 800;
 }
@@ -2828,11 +2836,39 @@ h2 {
   object-position: center;
 }
 
+.hero-promo-contact {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 18px;
+  padding: 14px 18px;
+  background: rgba(18, 54, 0, 0.96);
+  color: #fff;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 0.86rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.hero-promo-contact a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.hero-promo-contact a:hover {
+  text-decoration: underline;
+}
+
 .hero-slider-controls {
   position: relative;
   z-index: 3;
   display: flex;
-  margin-top: -35px;
+  margin-top: 28px;
   align-items: center;
   gap: 9px;
 }

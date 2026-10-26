@@ -27,6 +27,7 @@ export default function Footer() {
           <p>Ndzalama Ngwenya</p>
           <p>Marketing Manager</p>
           <a href="tel:+27782785314">078 278 5314</a>
+          <a href="mailto:sales@mybiglittlefarm.co.za">sales@mybiglittlefarm.co.za</a>
           <address>
             3 Bodley Road<br />
             Laezonia<br />

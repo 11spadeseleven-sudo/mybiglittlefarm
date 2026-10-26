@@ -187,6 +187,7 @@ export default function AboutPage() {
                 <h3>Ndzalama Ngwenya</h3>
                 <p className="about-contact-role">Marketing Manager</p>
                 <a href="tel:+27782785314">078 278 5314</a>
+                <a href="mailto:sales@mybiglittlefarm.co.za">sales@mybiglittlefarm.co.za</a>
                 <p>
                   Contact Ndzalama for product availability, household orders,
                   bulk enquiries and business supply requests.

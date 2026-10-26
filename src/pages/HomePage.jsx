@@ -15,7 +15,7 @@ import {
 } from "../components/Icons";
 
 const quailWhatsappBase = "https://wa.me/27782785314";
-const fertileWhatsappBase = "https://wa.me/27716562369";
+const fertileWhatsappBase = "https://wa.me/27782785314";
 
 const quailWhatsappUrl = `${quailWhatsappBase}?text=${encodeURIComponent(
   "Hello My Big Little Farm. I would like to enquire about your fresh quail eggs."
@@ -26,21 +26,6 @@ const fertileWhatsappUrl = `${fertileWhatsappBase}?text=${encodeURIComponent(
 )}`;
 
 const heroSlides = [
-  {
-    id: "fertile",
-    eyebrow: "Fertile eggs now available",
-    title: "Grow Your Flock.",
-    highlight: "Fertile Eggs from R50.",
-    lead: "Buff Orpington and Light Columbian Brahma fertile eggs are now available from My Big Little Farm.",
-    primaryLabel: "Order Fertile Eggs",
-    primaryHref: fertileWhatsappUrl,
-    secondaryLabel: "Contact the Farm",
-    secondaryHref: "/contact",
-    trustItems: ["R50 an egg", "Buff Orpington", "Light Columbian Brahma"],
-    image: "/assets/fertile-eggs-promo.png",
-    imageAlt: "My Big Little Farm fertile egg promotion for Buff Orpington and Light Columbian Brahma eggs",
-    imageClass: "hero-promo-image",
-  },
   {
     id: "quail",
     eyebrow: "Fresh from our farm",
@@ -55,6 +40,21 @@ const heroSlides = [
     image: "/assets/quail-eggs-closeup.jpg",
     imageAlt: "A close-up collection of naturally speckled quail eggs",
     imageClass: "",
+  },
+  {
+    id: "fertile",
+    eyebrow: "Fertile eggs now available",
+    title: "Grow Your Flock.",
+    highlight: "Fertile Eggs from R50.",
+    lead: "Buff Orpington and Light Columbian Brahma fertile eggs are now available from My Big Little Farm.",
+    primaryLabel: "Order Fertile Eggs",
+    primaryHref: fertileWhatsappUrl,
+    secondaryLabel: "Contact the Farm",
+    secondaryHref: "/contact",
+    trustItems: ["R50 an egg", "Buff Orpington", "Light Columbian Brahma"],
+    image: "/assets/fertile-eggs-promo.png",
+    imageAlt: "My Big Little Farm fertile egg promotion for Buff Orpington and Light Columbian Brahma eggs",
+    imageClass: "hero-promo-image",
   },
 ];
 
@@ -182,6 +182,12 @@ export default function HomePage() {
                   src={slide.image}
                   alt={slide.imageAlt}
                 />
+                {slide.id === "fertile" && (
+                  <div className="hero-promo-contact">
+                    <a href="tel:+27782785314">078 278 5314</a>
+                    <a href="mailto:sales@mybiglittlefarm.co.za">sales@mybiglittlefarm.co.za</a>
+                  </div>
+                )}
               </div>
             </div>
           </div>

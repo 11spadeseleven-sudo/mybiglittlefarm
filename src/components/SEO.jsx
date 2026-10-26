@@ -127,6 +127,7 @@ export default function SEO({
       logo: `${origin}/assets/logo.png`,
       image: imageUrl,
       telephone: "+27 78 278 5314",
+      email: "sales@mybiglittlefarm.co.za",
       address: {
         "@type": "PostalAddress",
         streetAddress: "3 Bodley Road",
