@@ -2,7 +2,7 @@ import SEO from "../components/SEO";
 import "./ComingSoonPage.css";
 
 const WHATSAPP_URL =
-  "https://wa.me/27782785314?text=Hello%20My%20Big%20Little%20Farm%2C%20I%20would%20like%20to%20make%20an%20enquiry.";
+  "https://wa.me/27716562369?text=Hello%20My%20Big%20Little%20Farm%2C%20I%20would%20like%20to%20make%20an%20enquiry.";
 
 export default function ComingSoonPage() {
   return (
@@ -45,7 +45,7 @@ export default function ComingSoonPage() {
             target="_blank"
             rel="noreferrer"
           >
-            WhatsApp 078 278 5314
+            WhatsApp 071 656 2369
           </a>
 
           <a
@@ -57,7 +57,7 @@ export default function ComingSoonPage() {
         </div>
 
         <div className="coming-soon-contact">
-          <a href="tel:+27782785314">078 278 5314</a>
+          <a href="tel:+27716562369">071 656 2369</a>
           <span aria-hidden="true">•</span>
           <span>3 Bodley Road, Laezonia, Centurion</span>
         </div>
