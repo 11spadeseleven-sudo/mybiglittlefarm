@@ -5,7 +5,7 @@ import { MenuIcon } from "./Icons";
 const links = [
   { label: "Home", to: "/" },
   { label: "About", to: "/about" },
-  { label: "Services", to: "/services" },
+  { label: "Products", to: "/products" },
   { label: "Contact", to: "/contact" },
 ];
 
@@ -56,11 +56,11 @@ export default function Header() {
 
           <a
             className="button button-dark header-cta"
-            href="https://wa.me/27782785314?text=Hello%20My%20Big%20Little%20Farm.%20I%20would%20like%20to%20enquire%20about%20your%20fresh%20quail%20eggs."
+            href="https://wa.me/27716562369?text=Hello%20My%20Big%20Little%20Farm.%20I%20would%20like%20to%20place%20an%20order%20or%20make%20an%20enquiry."
             target="_blank"
             rel="noreferrer"
           >
-            Order / Enquire
+            Order Now
           </a>
         </nav>
       </div>

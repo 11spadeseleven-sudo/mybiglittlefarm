@@ -50,9 +50,9 @@ export default function ComingSoonPage() {
 
           <a
             className="coming-soon-button coming-soon-button-secondary"
-            href="mailto:sales@mybiglittlefarm.co.za"
+            href="mailto:info@mybiglittlefarm.co.za"
           >
-            sales@mybiglittlefarm.co.za
+            info@mybiglittlefarm.co.za
           </a>
         </div>
 

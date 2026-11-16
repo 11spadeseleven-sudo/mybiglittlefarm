@@ -122,12 +122,12 @@ export default function SEO({
       "@type": "LocalBusiness",
       name: DEFAULT_SITE_NAME,
       description:
-        "Fresh quail eggs supplied with care from My Big Little Farm in Laezonia, Centurion.",
+        "Premium quail, rabbits, ducks and heritage poultry supplied from My Big Little Farm in Laezonia, Gauteng.",
       url: origin,
       logo: `${origin}/assets/logo.png`,
       image: imageUrl,
-      telephone: "+27 78 278 5314",
-      email: "sales@mybiglittlefarm.co.za",
+      telephone: "+27 71 656 2369",
+      email: "info@mybiglittlefarm.co.za",
       address: {
         "@type": "PostalAddress",
         streetAddress: "3 Bodley Road",

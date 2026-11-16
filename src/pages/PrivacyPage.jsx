@@ -58,8 +58,8 @@ export default function PrivacyPage() {
                 </p>
                 <p>
                   Contact person: Ndzalama Ngwenya, Marketing Manager<br />
-                  Telephone and WhatsApp: 078 278 5314<br />
-                  Email: sales@mybiglittlefarm.co.za<br />
+                  Telephone and WhatsApp: 071 656 2369<br />
+                  Email: info@mybiglittlefarm.co.za<br />
                   Address: 3 Bodley Road, Laezonia, Centurion
                 </p>
               </section>
@@ -85,7 +85,7 @@ export default function PrivacyPage() {
                 <p>We use personal information to:</p>
                 <ul>
                   <li>Respond to product, availability and pricing enquiries.</li>
-                  <li>Discuss household, bulk and business supply requests.</li>
+                  <li>Discuss product, wholesale and business supply requests.</li>
                   <li>Contact you about the enquiry or order you initiated.</li>
                   <li>Arrange collection or delivery where this is agreed.</li>
                   <li>Maintain reasonable business and enquiry records.</li>
@@ -147,8 +147,8 @@ export default function PrivacyPage() {
                   consent where processing depends on consent.
                 </p>
                 <p>
-                  Send a request to Ndzalama Ngwenya using 078 278 5314,
-                  sales@mybiglittlefarm.co.za, or the physical address listed above. We may need to verify your
+                  Send a request to Ndzalama Ngwenya using 071 656 2369,
+                  info@mybiglittlefarm.co.za, or the physical address listed above. We may need to verify your
                   identity before acting on a request.
                 </p>
               </section>

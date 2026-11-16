@@ -4,7 +4,7 @@ export default function WhatsAppButton() {
   return (
     <a
       className="floating-whatsapp"
-      href="https://wa.me/27782785314?text=Hello%20My%20Big%20Little%20Farm.%20I%20would%20like%20to%20enquire%20about%20your%20fresh%20quail%20eggs."
+      href="https://wa.me/27716562369?text=Hello%20My%20Big%20Little%20Farm.%20I%20would%20like%20to%20place%20an%20order%20or%20make%20an%20enquiry."
       target="_blank"
       rel="noreferrer"
       aria-label="Enquire on WhatsApp"
