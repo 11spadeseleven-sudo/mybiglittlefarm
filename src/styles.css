@@ -2800,7 +2800,7 @@ h2 {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  opacity: 0.16;
+  opacity: 0.90;
   filter: saturate(0.8) contrast(0.92);
 }
 
@@ -2808,7 +2808,7 @@ h2 {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.88) 44%, rgba(255, 255, 255, 0.76) 100%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.68) 44%, rgba(255, 255, 255, 0.56) 100%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.48));
 }
 
@@ -3094,16 +3094,99 @@ h2 {
 .new-home-hero-image {
   position: relative;
   overflow: hidden;
-  min-height: 460px;
-  border-radius: 42px 42px 42px 10px;
+  height: clamp(360px, 31vw, 430px);
+  min-height: 0;
+  border-radius: 34px 34px 34px 10px;
   box-shadow: var(--shadow);
 }
 
 .new-home-hero-image img {
   width: 100%;
   height: 100%;
-  min-height: 460px;
+  min-height: 0;
   object-fit: cover;
+  object-position: center 45%;
+}
+
+.new-home-image-slider {
+  isolation: isolate;
+}
+
+.new-home-image-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  transform: scale(1.015);
+  transition: opacity 520ms ease, transform 760ms ease;
+  pointer-events: none;
+}
+
+.new-home-image-slide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.new-home-slider-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 4;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255,255,255,.72);
+  border-radius: 50%;
+  background: rgba(10, 63, 8, .72);
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: background .2s ease, transform .2s ease;
+  backdrop-filter: blur(8px);
+}
+
+.new-home-slider-arrow:hover {
+  background: rgba(10, 63, 8, .92);
+  transform: translateY(-50%) scale(1.04);
+}
+
+.new-home-slider-arrow-left { left: 18px; }
+.new-home-slider-arrow-right { right: 18px; }
+
+.new-home-slider-dots {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  z-index: 4;
+  display: flex;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.78);
+  transform: translateX(-50%);
+  backdrop-filter: blur(8px);
+}
+
+.new-home-slider-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(10, 63, 8, .28);
+  cursor: pointer;
+  transition: width .2s ease, background .2s ease;
+}
+
+.new-home-slider-dot.active {
+  width: 22px;
+  border-radius: 999px;
+  background: var(--fresh-green);
 }
 
 .home-farm-intro {
@@ -3318,23 +3401,16 @@ h2 {
   box-shadow: 0 20px 50px rgba(86,185,71,.14);
 }
 
-.farm-product-card-top {
+.farm-product-card-heading {
   display: flex;
   justify-content: space-between;
-  gap: 20px;
-  align-items: center;
-  margin-bottom: 20px;
+  gap: 18px;
+  align-items: flex-start;
+  margin-bottom: 22px;
 }
 
-.farm-product-icon {
-  display: inline-flex;
-  width: 58px;
-  height: 58px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 18px;
-  background: var(--cream);
-  color: var(--fresh-green);
+.farm-product-card-heading h2 {
+  margin: 0;
 }
 
 .farm-product-badge {
@@ -3351,6 +3427,10 @@ h2 {
 .farm-product-card h2 {
   margin-bottom: 12px;
   font-size: clamp(2.3rem, 4vw, 3.3rem);
+}
+
+.farm-product-card-heading h2 {
+  margin-bottom: 0;
 }
 
 .farm-product-card > p {
@@ -3480,9 +3560,25 @@ h2 {
     font-size: clamp(3.25rem, 15vw, 5rem);
   }
 
-  .new-home-hero-image,
+  .new-home-hero-image {
+    height: 320px;
+    min-height: 0;
+  }
+
   .new-home-hero-image img {
-    min-height: 360px;
+    min-height: 0;
+  }
+
+  .new-home-slider-arrow {
+    width: 40px;
+    height: 40px;
+  }
+
+  .new-home-slider-arrow-left { left: 12px; }
+  .new-home-slider-arrow-right { right: 12px; }
+
+  .new-home-slider-dots {
+    bottom: 14px;
   }
 
   .home-farm-intro {
@@ -3685,7 +3781,7 @@ h2 {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
-  margin: -10px -10px 28px;
+  margin: 0 -10px 26px;
 }
 
 .farm-product-photo {
@@ -3731,5 +3827,202 @@ h2 {
   .farm-product-photo,
   .farm-product-photo img {
     min-height: 260px;
+  }
+
+  .farm-product-card-heading {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .farm-product-badge {
+    align-self: flex-start;
+  }
+}
+
+/* =========================================
+   Mobile navigation + hero spacing refinement
+   ========================================= */
+@media (max-width: 860px) {
+  body.menu-open {
+    overflow: hidden;
+  }
+
+  .site-header {
+    z-index: 1000;
+    overflow: visible;
+  }
+
+  .header-inner {
+    position: static;
+  }
+
+  .menu-toggle {
+    position: relative;
+    z-index: 1002;
+    flex: 0 0 auto;
+    border: 1px solid rgba(18, 54, 0, 0.08);
+    box-shadow: 0 10px 26px rgba(18, 54, 0, 0.12);
+  }
+
+  .primary-nav {
+    position: absolute;
+    z-index: 1001;
+    top: 100%;
+    right: 0;
+    bottom: auto;
+    left: 0;
+    width: 100%;
+    height: calc(100dvh - var(--header-height));
+    padding: 24px 24px 34px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 24px;
+    border-top: 1px solid var(--line);
+    background: #ffffff;
+    box-shadow: 0 24px 50px rgba(18, 54, 0, 0.12);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+  }
+
+  .primary-nav.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .nav-links {
+    display: grid;
+    gap: 8px;
+  }
+
+  .nav-links a {
+    display: flex;
+    min-height: 56px;
+    padding: 0 18px;
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: 16px;
+    color: var(--deep-green);
+    background: #ffffff;
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 1.08rem;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active {
+    border-color: rgba(86, 185, 71, 0.22);
+    background: rgba(86, 185, 71, 0.09);
+    color: var(--fresh-green);
+  }
+
+  .nav-links a::after {
+    display: none;
+  }
+
+  .header-cta {
+    width: 100%;
+    min-height: 56px;
+    margin-top: 2px;
+    border-radius: 16px;
+  }
+
+  .section-video-hero {
+    min-height: 500px;
+    padding: 76px 0 80px;
+  }
+
+  .about-video-hero-content,
+  .products-video-hero .products-hero-inner {
+    width: min(calc(100% - 48px), 930px);
+    max-width: 930px;
+    margin-inline: auto;
+  }
+
+  .about-video-hero-content h1,
+  .products-video-hero h1 {
+    max-width: 760px;
+    margin: 20px auto 22px;
+    font-size: clamp(3.15rem, 12.5vw, 4.35rem);
+    line-height: 0.94;
+  }
+
+  .about-video-hero-content > p,
+  .products-video-hero p {
+    max-width: 650px;
+    margin: 0 auto 30px;
+    padding-inline: 4px;
+  }
+}
+
+@media (max-width: 620px) {
+  .primary-nav {
+    padding: 20px 20px 30px;
+  }
+
+  .section-video-hero {
+    min-height: 0;
+    padding: 68px 0 72px;
+  }
+
+  .about-video-hero-content,
+  .products-video-hero .products-hero-inner {
+    width: calc(100% - 44px);
+  }
+
+  .about-video-hero-content h1,
+  .products-video-hero h1 {
+    margin-top: 18px;
+    font-size: clamp(3rem, 12.2vw, 3.85rem);
+    line-height: 0.95;
+  }
+
+  .about-video-hero-content > p,
+  .products-video-hero p {
+    margin-bottom: 28px;
+    font-size: 0.98rem;
+    line-height: 1.65;
+  }
+
+  .about-video-hero-content .hero-actions {
+    gap: 12px;
+  }
+}
+
+/* About + Products hero video visibility */
+.section-background-video {
+  opacity: 0.78;
+}
+
+.section-video-overlay {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.52) 0%,
+      rgba(255, 255, 255, 0.42) 52%,
+      rgba(255, 255, 255, 0.32) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.12),
+      rgba(255, 255, 255, 0.20)
+    );
+}
+
+@media (max-width: 860px) {
+  .section-background-video {
+    opacity: 0.72;
+  }
+
+  .section-video-overlay {
+    background: rgba(255, 255, 255, 0.48);
   }
 }

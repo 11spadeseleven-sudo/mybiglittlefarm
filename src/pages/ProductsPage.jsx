@@ -6,8 +6,6 @@ import {
   ArrowRightIcon,
   CareIcon,
   CheckIcon,
-  EggIcon,
-  HomeIcon,
   LeafIcon,
   MessageIcon,
   PackageIcon,
@@ -20,8 +18,14 @@ const products = [
   {
     title: "Premium Quail",
     badge: "Hero Product",
-    icon: EggIcon,
     description: "Our specialist range for homes, kitchens, farmers and commercial buyers.",
+    images: [
+      {
+        src: "https://images.pexels.com/photos/4530408/pexels-photo-4530408.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        alt: "Quails in a breeding enclosure on a poultry farm",
+        label: "Premium quail",
+      },
+    ],
     items: [
       "Fresh quail eggs",
       "Premium quail meat",
@@ -34,24 +38,29 @@ const products = [
   },
   {
     title: "Rabbits",
-    icon: CareIcon,
     description: "Healthy rabbits available for meat production and breeding programmes.",
+    images: [
+      {
+        src: "https://images.pexels.com/photos/34074239/pexels-photo-34074239.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        alt: "Three brown rabbits grazing on fresh grass outdoors",
+        label: "Healthy breeding rabbits",
+      },
+    ],
     items: ["Healthy breeding rabbits", "Rabbit meat", "Young kits", "Breeding stock"],
   },
   {
     title: "Heritage Chickens",
-    icon: HomeIcon,
     description: "Heritage poultry including Buff Orpington and Light Columbian Brahma.",
     images: [
-      {
-        src: "/assets/buff-orpington-closeup.jpg",
-        alt: "Buff Orpington chickens at My Big Little Farm",
-        label: "Buff Orpington",
-      },
       {
         src: "/assets/light-columbian-brahma.jpg",
         alt: "Light Columbian Brahma chickens at My Big Little Farm",
         label: "Light Columbian Brahma",
+      },
+      {
+        src: "/assets/heritage-day-old-chicks.jpg",
+        alt: "Day-old heritage chicks at My Big Little Farm",
+        label: "Day-old chicks",
       },
     ],
     items: [
@@ -67,8 +76,19 @@ const products = [
   },
   {
     title: "Ducks",
-    icon: LeafIcon,
     description: "Muscovy ducks for customers looking for birds, eggs, meat or breeding stock.",
+    images: [
+      {
+        src: "/assets/muscovy-ducks-ducklings.jpg",
+        alt: "Muscovy ducks with ducklings at My Big Little Farm",
+        label: "Muscovy ducks & ducklings",
+      },
+      {
+        src: "/assets/muscovy-breeding-flock.jpg",
+        alt: "Muscovy breeding flock at My Big Little Farm",
+        label: "Muscovy breeding stock",
+      },
+    ],
     items: ["Muscovy ducks", "Ducklings", "Fertile eggs", "Duck meat", "Breeding pairs"],
   },
 ];
@@ -108,10 +128,9 @@ export default function ProductsPage() {
               loop
               playsInline
               preload="metadata"
-              poster="/assets/quail-eggs-wide.jpg"
             >
               <source
-                src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Chickens_scratching.webm"
+                src="/assets/farm.mp4"
                 type="video/webm"
               />
             </video>
@@ -130,10 +149,17 @@ export default function ProductsPage() {
 
         <section className="products-section section-white">
           <div className="container products-grid">
-            {products.map(({ title, badge, icon: Icon, description, images, items }) => (
+            {products.map(({ title, badge, description, images, items }) => (
               <article className={`farm-product-card ${badge ? "farm-product-card-featured" : ""}`} key={title}>
+                <div className="farm-product-card-heading">
+                  <h2>{title}</h2>
+                  {badge && <span className="farm-product-badge">★ {badge}</span>}
+                </div>
                 {images && (
-                  <div className="farm-product-photo-grid">
+                  <div
+                    className="farm-product-photo-grid"
+                    style={images.length === 1 ? { gridTemplateColumns: "1fr" } : undefined}
+                  >
                     {images.map((image) => (
                       <figure className="farm-product-photo" key={image.src}>
                         <img src={image.src} alt={image.alt} loading="lazy" />
@@ -142,11 +168,6 @@ export default function ProductsPage() {
                     ))}
                   </div>
                 )}
-                <div className="farm-product-card-top">
-                  <span className="farm-product-icon"><Icon size={32} /></span>
-                  {badge && <span className="farm-product-badge">★ {badge}</span>}
-                </div>
-                <h2>{title}</h2>
                 <p>{description}</p>
                 <ul>
                   {items.map((item) => (

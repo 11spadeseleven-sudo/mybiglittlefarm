@@ -25,10 +25,9 @@ export default function AboutPage() {
               loop
               playsInline
               preload="metadata"
-              poster="/assets/quail-eggs-wide.jpg"
             >
               <source
-                src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Chickens_scratching.webm"
+                src="/assets/chickens.mp4"
                 type="video/webm"
               />
             </video>

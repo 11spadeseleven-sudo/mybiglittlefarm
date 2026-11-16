@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -12,6 +13,15 @@ const stats = [
   { value: "National Supply", label: "Serving customers across South Africa." },
 ];
 
+
+const heroImages = [
+  { src: "/assets/home-hero-chick.jpg", alt: "Day-old chick raised at My Big Little Farm" },
+  { src: "/assets/farm-poultry-flock.jpg", alt: "Heritage poultry roaming at My Big Little Farm" },
+  { src: "/assets/buff-orpington-farm.jpg", alt: "Buff Orpington chickens at My Big Little Farm" },
+  { src: "/assets/muscovy-breeding-flock.jpg", alt: "Muscovy duck breeding flock at My Big Little Farm" },
+  { src: "/assets/light-columbian-brahma.jpg", alt: "Light Columbian Brahma chickens at My Big Little Farm" },
+];
+
 const highlights = [
   { icon: EggIcon, title: "Premium Quail", text: "Fresh eggs, fertile eggs, meat, chicks and breeding stock." },
   { icon: CareIcon, title: "Healthy Livestock", text: "Rabbits, ducks and heritage poultry raised with care." },
@@ -20,6 +30,37 @@ const highlights = [
 ];
 
 export default function HomePage() {
+  const [heroImageIndex, setHeroImageIndex] = useState(0);
+  const touchStartX = useRef(null);
+
+  const showPreviousHeroImage = () => {
+    setHeroImageIndex((current) => (current - 1 + heroImages.length) % heroImages.length);
+  };
+
+  const showNextHeroImage = () => {
+    setHeroImageIndex((current) => (current + 1) % heroImages.length);
+  };
+
+  useEffect(() => {
+    const timer = window.setInterval(showNextHeroImage, 5500);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const handleTouchStart = (event) => {
+    touchStartX.current = event.touches[0]?.clientX ?? null;
+  };
+
+  const handleTouchEnd = (event) => {
+    if (touchStartX.current === null) return;
+    const endX = event.changedTouches[0]?.clientX ?? touchStartX.current;
+    const distance = endX - touchStartX.current;
+    touchStartX.current = null;
+
+    if (Math.abs(distance) < 45) return;
+    if (distance > 0) showPreviousHeroImage();
+    else showNextHeroImage();
+  };
+
   return (
     <div className="site-shell">
       <SEO
@@ -39,11 +80,11 @@ export default function HomePage() {
               loop
               playsInline
               preload="metadata"
-              poster="/assets/quail-eggs-wide.jpg"
+              poster="/assets/home-hero-chick.jpg"
             >
               <source
-                src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Chickens_scratching.webm"
-                type="video/webm"
+                src="/assets/chicks.mp4"
+                type="video/mp4"
               />
             </video>
             <div className="hero-video-wash" />
@@ -74,8 +115,50 @@ export default function HomePage() {
             </div>
 
             <div className="new-home-hero-visual">
-              <div className="image-card new-home-hero-image">
-                <img src="/assets/quail-eggs-closeup.jpg" alt="Premium quail eggs from My Big Little Farm" />
+              <div
+                className="image-card new-home-hero-image new-home-image-slider"
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
+              >
+                {heroImages.map((image, index) => (
+                  <img
+                    key={image.src}
+                    src={image.src}
+                    alt={image.alt}
+                    className={`new-home-image-slide ${index === heroImageIndex ? "active" : ""}`}
+                    aria-hidden={index !== heroImageIndex}
+                  />
+                ))}
+
+                <button
+                  className="new-home-slider-arrow new-home-slider-arrow-left"
+                  type="button"
+                  onClick={showPreviousHeroImage}
+                  aria-label="Previous farm image"
+                >
+                  ‹
+                </button>
+                <button
+                  className="new-home-slider-arrow new-home-slider-arrow-right"
+                  type="button"
+                  onClick={showNextHeroImage}
+                  aria-label="Next farm image"
+                >
+                  ›
+                </button>
+
+                <div className="new-home-slider-dots" aria-label="Farm image slider">
+                  {heroImages.map((image, index) => (
+                    <button
+                      key={image.src}
+                      className={`new-home-slider-dot ${index === heroImageIndex ? "active" : ""}`}
+                      type="button"
+                      onClick={() => setHeroImageIndex(index)}
+                      aria-label={`Show farm image ${index + 1}`}
+                      aria-current={index === heroImageIndex ? "true" : undefined}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           </div>
